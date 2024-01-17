@@ -3,7 +3,7 @@ import logging
 
 
 def error_message_details(error, error_detail:sys):
-    _,_,exe_tb = error_detail.exe_info()
+    _,_,exe_tb = error_detail.exc_info()
     file_name=exe_tb.tb_frame.f_code.co_filename
     error_message = 'Error occured in python script name-{} line number [{}] error massage[{}]'.format(
         file_name, exe_tb.tb_lineno, str(error)
@@ -19,11 +19,3 @@ class CustomException(Exception):
 
     def __str(self):
         return self.error_message
-
-
-if __name__=='__main__':
-    try:
-        a=1/0
-    except Exception as e:
-        logging.info('Divide by o error')
-        raise CustomException(e,sys)
